@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/14/trunk/ITEADemo/lib
+END
+smackx.jar
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/trunk/ITEADemo/lib/smackx.jar
+END
+smackx-debug.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/ITEADemo/lib/smackx-debug.jar
+END
+smackx-jingle.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/ITEADemo/lib/smackx-jingle.jar
+END
+smack.jar
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/14/trunk/ITEADemo/lib/smack.jar
+END
