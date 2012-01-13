@@ -4,10 +4,12 @@ package org.itea.neotiq.activities;
 import org.itea.neotiq.R;
 import org.itea.neotiq.devicemodel.Device;
 import org.itea.neotiq.devicemodel.DeviceManager;
-import org.itea.neotiq.devicemodel.VirtualDevice;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,17 @@ public class DevicesView extends Activity {
 
         mDevicesView = (TableLayout)findViewById(R.id.devicesView);
         this.populateDevices();
+        
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals("device.added")) {
+                    populateDevices();
+                }
+            }
+        };
+        registerReceiver(receiver, new IntentFilter("device.added"));
     }
 
     private void populateDevices() {

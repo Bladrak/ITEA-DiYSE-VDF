@@ -63,6 +63,25 @@ public class XmlDescription {
 
                         serializer.endTag("", "operation");
                         
+                        serializer.startTag("", "operation");
+                        serializer.attribute("", "cost", "5");
+                        serializer.attribute("", "knowledgeLevel", "Data");
+                        serializer.attribute("", "name", "device");
+            
+                            serializer.startTag("", "output");
+                            serializer.attribute("", "annotation", "Result");
+                            serializer.attribute("", "event", "false");
+                            serializer.attribute("", "type", "text/plain");
+                            serializer.endTag("", "output");
+                        
+                            serializer.startTag("", "input");
+                            serializer.attribute("", "annotation", "Device");
+                            serializer.attribute("", "event", "false");
+                            serializer.attribute("", "type", "text/xml");
+                            serializer.endTag("", "input");
+
+                        serializer.endTag("", "operation");
+                        
                         for (Device d : DeviceManager.getDevices()) {
                             serializer.startTag("", "operation");
                             serializer.attribute("", "cost", "5");
@@ -132,6 +151,33 @@ public class XmlDescription {
                                 serializer.endTag("", "ns4:method");
                             serializer.endTag("", "ns4:resource");
                                     
+                            serializer.startTag("", "ns4:resource");
+                            serializer.attribute("", "path", "/device");
+                            serializer.attribute("", "ns2:jid", XMPPComm.getInstance().XMPP_JID);
+                                serializer.startTag("", "ns4:method");
+                                serializer.attribute("", "name", "POST");
+                                serializer.attribute("", "ns2:operation", "device");
+                                    serializer.startTag("", "ns4:request");
+                                        serializer.startTag("", "ns4:representation");
+                                        serializer.attribute("", "mediaType", "text/xml");
+                                            serializer.startTag("", "ns4:param");
+                                            serializer.attribute("", "name", "device");
+                                            serializer.attribute("", "style", "plain");
+                                            serializer.endTag("", "ns4:param");
+                                        serializer.endTag("", "ns4:representation");
+                                    serializer.endTag("", "ns4:request");
+                                    serializer.startTag("", "ns4:response");
+                                        serializer.startTag("", "ns4:representation");
+                                        serializer.attribute("", "mediaType", "text/plain");
+                                            serializer.startTag("", "ns4:param");
+                                            serializer.attribute("", "name", "result");
+                                            serializer.attribute("", "style", "plain");
+                                            serializer.endTag("", "ns4:param");
+                                        serializer.endTag("", "ns4:representation");
+                                    serializer.endTag("", "ns4:response");
+                                serializer.endTag("", "ns4:method");
+                            serializer.endTag("", "ns4:resource");
+
                             for (Device d : DeviceManager.getDevices()) {
                                 serializer.startTag("", "ns4:resource");
                                 serializer.attribute("", "path", d.getName().replace(" ", "")+"/currentValue");

@@ -3,6 +3,9 @@
  */
 package org.itea.neotiq.devicemodel;
 
+import org.itea.neotiq.application.CustomApplication;
+
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -34,20 +37,28 @@ public class DeviceManager {
         return dTypes;
     }
 
-    public static void addDevice(String text, String name) {
+    public static void addDevice(String text, String name) throws DeviceNotSupportedException {
         Log.d("DeviceManager", "Adding device "+text+" named "+name);
         for (String s : VirtualDevice.getVirtualDeviceTypes()) {
             if (s.equals(text)) {
                 VirtualDevice.addDevice(text, name);
+                refreshActivity();
                 return;
             }
         }
         for (String s : InternalDevice.getInternalDeviceTypes()) {
             if (s.equals(text)) {
                 InternalDevice.addDevice(text, name);
+                refreshActivity();
                 return;
             }
         }
+        throw new DeviceNotSupportedException();
+    }
+
+    private static void refreshActivity() {
+        Intent intent = new Intent("device.added");
+        CustomApplication.getAppContext().sendBroadcast(intent);
     }
 
     public static Device getDeviceNamed(String string) throws DeviceNotFoundException {
@@ -58,5 +69,5 @@ public class DeviceManager {
         }
         throw new DeviceNotFoundException();
     }
-    
+
 }

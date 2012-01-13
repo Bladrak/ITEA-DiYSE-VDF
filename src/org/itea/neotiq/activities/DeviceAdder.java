@@ -6,6 +6,7 @@ package org.itea.neotiq.activities;
 
 import org.itea.neotiq.R;
 import org.itea.neotiq.devicemodel.DeviceManager;
+import org.itea.neotiq.devicemodel.DeviceNotSupportedException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -55,7 +56,12 @@ public class DeviceAdder extends Activity {
     }
 
     protected void addDevice(String text, String name) {
-        DeviceManager.addDevice(text, name);
+        try {
+            DeviceManager.addDevice(text, name);
+        } catch (DeviceNotSupportedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         Intent i = new Intent(this, DevicesView.class);
         startActivity(i);
     }
