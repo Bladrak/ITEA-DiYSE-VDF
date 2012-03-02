@@ -21,8 +21,10 @@ import java.io.UnsupportedEncodingException;
 
 public class XmlDescription {
     
-    private static final String WS_URL = "http://213.215.48.35:9903";
-    private static final String WS_ADD_QUERY = "diyse/global-repo";
+    /*private static final String WS_URL = "http://213.215.48.35:9903";
+    private static final String WS_ADD_QUERY = "diyse/global-repo";*/
+	private static final String WS_URL = "http://webmow.ensiie.fr";
+    private static final String WS_ADD_QUERY = "dyse/global-repo";
     
 
     public static String generateXML() {
@@ -33,33 +35,32 @@ public class XmlDescription {
             serializer.setOutput(writer);
             serializer.startDocument("UTF-8", true);
                 serializer.startTag("", "ns2:remote-device");
-                serializer.attribute("", "xmlns", "http://api.reasoning.diyse.org");
+                serializer.attribute("", "xmlns", "http://generated.reasoning.diyse.org");
                 serializer.attribute("", "xmlns:ns2", "http://generated.device.diyse.org");
                 //serializer.attribute("", "xmlns:ns3", "http://model.device.gateway.diyse.org");
-                serializer.attribute("", "xmlns:ns4", "http://wadl.dev.java.net/2009/02");
+                serializer.attribute("", "xmlns:ns4", "http://wadl.dev.java.net");
                 serializer.attribute("", "id", id);
-                serializer.attribute("", "type", "NOT IMPLEMENTED");
             
-                    serializer.startTag("", "ns2:deviceDescription");
+                    serializer.startTag("", "deviceDescription");
                     serializer.attribute("", "id", id);
-                    serializer.attribute("", "type", "NOT IMPLEMENTED");
+                    serializer.attribute("", "type", "NeotiqVDF");
             
                         serializer.startTag("", "operation");
                         serializer.attribute("", "cost", "5");
                         serializer.attribute("", "knowledgeLevel", "Data");
                         serializer.attribute("", "name", "vdfList");
             
-                            serializer.startTag("", "output");
+                            serializer.startTag("", "outputs");
                             serializer.attribute("", "annotation", "Description");
                             serializer.attribute("", "event", "false");
                             serializer.attribute("", "type", "text/xml");
-                            serializer.endTag("", "output");
+                            serializer.endTag("", "outputs");
                         
-                            serializer.startTag("", "input");
+                            serializer.startTag("", "inputs");
                             serializer.attribute("", "annotation", "void");
                             serializer.attribute("", "event", "false");
                             serializer.attribute("", "type", "void");
-                            serializer.endTag("", "input");
+                            serializer.endTag("", "inputs");
 
                         serializer.endTag("", "operation");
                         
@@ -68,17 +69,17 @@ public class XmlDescription {
                         serializer.attribute("", "knowledgeLevel", "Data");
                         serializer.attribute("", "name", "device");
             
-                            serializer.startTag("", "output");
+                            serializer.startTag("", "outputs");
                             serializer.attribute("", "annotation", "Result");
                             serializer.attribute("", "event", "false");
                             serializer.attribute("", "type", "text/plain");
-                            serializer.endTag("", "output");
+                            serializer.endTag("", "outputs");
                         
-                            serializer.startTag("", "input");
+                            serializer.startTag("", "inputs");
                             serializer.attribute("", "annotation", "Device");
                             serializer.attribute("", "event", "false");
                             serializer.attribute("", "type", "text/xml");
-                            serializer.endTag("", "input");
+                            serializer.endTag("", "inputs");
 
                         serializer.endTag("", "operation");
                         
@@ -88,17 +89,17 @@ public class XmlDescription {
                             serializer.attribute("", "knowledgeLevel", "Data");
                             serializer.attribute("", "name", d.getName().replace(" ", "")+"currentValue");
                 
-                                serializer.startTag("", "output");
+                                serializer.startTag("", "outputs");
                                 serializer.attribute("", "annotation", d.getSemanticAnnotation());
                                 serializer.attribute("", "event", "false");
                                 serializer.attribute("", "type", (d instanceof VDEditText && ((VDEditText)d).isInt()) ? "int" : "string");
-                                serializer.endTag("", "output");
+                                serializer.endTag("", "outputs");
 
-                                serializer.startTag("", "input");
+                                serializer.startTag("", "inputs");
                                 serializer.attribute("", "annotation", "void");
                                 serializer.attribute("", "event", "false");
                                 serializer.attribute("", "type", "void");
-                                serializer.endTag("", "input");
+                                serializer.endTag("", "inputs");
                             
                             serializer.endTag("", "operation");
                             
@@ -107,15 +108,15 @@ public class XmlDescription {
                             serializer.attribute("", "knowledgeLevel", "Data");
                             serializer.attribute("", "name", d.getName().replace(" ", "")+"event");
                 
-                                serializer.startTag("", "output");
+                                serializer.startTag("", "outputs");
                                 serializer.attribute("", "annotation", d.getClass().getName());
                                 serializer.attribute("", "event", "true");
                                 serializer.attribute("", "type", (d instanceof VDEditText && ((VDEditText)d).isInt()) ? "int" : "string");
-                                serializer.endTag("", "output");
+                                serializer.endTag("", "outputs");
                             
                             serializer.endTag("", "operation");
                         }
-                    serializer.endTag("", "ns2:deviceDescription");
+                    serializer.endTag("", "deviceDescription");
                     
                     serializer.startTag("", "ns2:grounding");
                     
@@ -129,11 +130,11 @@ public class XmlDescription {
                         serializer.endTag("", "ns2:publishes");
 
                         serializer.startTag("", "ns4:resources");
-                        serializer.attribute("", "base", "http://"+XMPPComm.XMPP_HOST+":"+XMPPComm.XMPP_PORT);
+                        serializer.attribute("", "base", "");
                         
                             serializer.startTag("", "ns4:resource");
-                            serializer.attribute("", "path", "/vdfList");
-                            serializer.attribute("", "ns2:jid", XMPPComm.getInstance().XMPP_JID);
+                            serializer.attribute("", "path", "vdfList");
+                            serializer.attribute("", "ns2:jid", XMPPComm.getInstance().XMPP_JID + "/Smack");
                                 serializer.startTag("", "ns4:method");
                                 serializer.attribute("", "name", "GET");
                                 serializer.attribute("", "ns2:operation", "vdfList");
@@ -152,8 +153,8 @@ public class XmlDescription {
                             serializer.endTag("", "ns4:resource");
                                     
                             serializer.startTag("", "ns4:resource");
-                            serializer.attribute("", "path", "/device");
-                            serializer.attribute("", "ns2:jid", XMPPComm.getInstance().XMPP_JID);
+                            serializer.attribute("", "path", "device");
+                            serializer.attribute("", "ns2:jid", XMPPComm.getInstance().XMPP_JID + "/Smack");
                                 serializer.startTag("", "ns4:method");
                                 serializer.attribute("", "name", "POST");
                                 serializer.attribute("", "ns2:operation", "device");
@@ -181,7 +182,7 @@ public class XmlDescription {
                             for (Device d : DeviceManager.getDevices()) {
                                 serializer.startTag("", "ns4:resource");
                                 serializer.attribute("", "path", d.getName().replace(" ", "")+"/currentValue");
-                                serializer.attribute("", "ns2:jid", ((XMPPComm)d.getDelegate()).XMPP_JID);
+                                serializer.attribute("", "ns2:jid", ((XMPPComm)d.getDelegate()).XMPP_JID + "/Smack");
                                     serializer.startTag("", "ns4:method");
                                     serializer.attribute("", "name", "GET");
                                     serializer.attribute("", "ns2:operation", d.getName().replace(" ", "")+"currentValue");
