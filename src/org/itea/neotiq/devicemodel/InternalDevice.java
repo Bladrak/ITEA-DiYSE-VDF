@@ -40,10 +40,12 @@ public class InternalDevice extends Device implements SensorEventListener, Reque
     public static Collection<String> getInternalDeviceTypes() {
         if (InternalDevice.subclasses == null) {
             InternalDevice.subclasses = new ArrayList<String>();
-            mSensorManager = (SensorManager)CustomApplication.getAppContext().getSystemService(
-                    Context.SENSOR_SERVICE);
-            for (Sensor s : mSensorManager.getSensorList(Sensor.TYPE_ALL)) {
-                InternalDevice.subclasses.add(s.getName());
+            if (!"google_sdk".equals(android.os.Build.MODEL)) { // Then we are not in the simulator
+                mSensorManager = (SensorManager)CustomApplication.getAppContext().getSystemService(
+                        Context.SENSOR_SERVICE);
+                for (Sensor s : mSensorManager.getSensorList(Sensor.TYPE_ALL)) {
+                    InternalDevice.subclasses.add(s.getName());
+                }
             }
         }
         return InternalDevice.subclasses;

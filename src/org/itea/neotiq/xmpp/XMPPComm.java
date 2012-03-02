@@ -38,15 +38,15 @@ public class XMPPComm implements DeviceDelegate, PacketListener, PacketFilter {
 
     protected static final String PREFIX = "VDFNeotiq_";
 
-//    protected static final String XMPP_HOST = "webmow.ensiie.fr";//"192.168.0.78";
+    protected static final String XMPP_HOST = "webmow.ensiie.fr";//"192.168.0.78";
 
-    protected static final String XMPP_HOST = "192.168.0.78";
+//    protected static final String XMPP_HOST = "192.168.0.78";
 
     protected static final int XMPP_PORT = 5222;
 
-//    private static final String XMPP_SERVICE_NAME = "webmow.ensiie.fr";//"iMac.local";
+    private static final String XMPP_SERVICE_NAME = "webmow.ensiie.fr";//"iMac.local";
 
-    private static final String XMPP_SERVICE_NAME = "iMac.local";
+//    private static final String XMPP_SERVICE_NAME = "iMac.local";
 
     private static final String XMPP_SERVICE_LOGIN = PREFIX + "Services";
 

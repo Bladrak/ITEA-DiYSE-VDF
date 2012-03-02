@@ -34,7 +34,7 @@ public class XmlDescription {
             serializer.startDocument("UTF-8", true);
                 serializer.startTag("", "ns2:remote-device");
                 serializer.attribute("", "xmlns", "http://api.reasoning.diyse.org");
-                serializer.attribute("", "xmlns:ns2", "http://device.diyse.org");
+                serializer.attribute("", "xmlns:ns2", "http://generated.device.diyse.org");
                 //serializer.attribute("", "xmlns:ns3", "http://model.device.gateway.diyse.org");
                 serializer.attribute("", "xmlns:ns4", "http://wadl.dev.java.net/2009/02");
                 serializer.attribute("", "id", id);
