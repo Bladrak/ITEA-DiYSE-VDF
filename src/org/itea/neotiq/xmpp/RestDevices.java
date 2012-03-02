@@ -30,13 +30,12 @@ public class RestDevices {
 
     private static final String TAG = "RestDevices";
 
-    @SuppressWarnings("rawtypes")
     public static XmppRest treatResponse(XmppRest xPacket) {
         try {
-            Class c = Class.forName(RestDevices.class.getName());
+            Class<RestDevices> c = RestDevices.class;
             String restMethod = xPacket.getMethod().toLowerCase()
                     + toCamelCaseStripSlashes(xPacket.getResource());
-            Class[] parTypes = new Class[1];
+            Class<?>[] parTypes = new Class<?>[1];
             parTypes[0] = XmppRest.class;
             Method m = c.getDeclaredMethod(restMethod, parTypes);
             XmppRest iq = (XmppRest)m.invoke(null, xPacket);

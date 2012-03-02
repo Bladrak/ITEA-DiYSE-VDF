@@ -80,7 +80,7 @@ public class DeviceEvent extends EventObject {
         } else {
             l_sb.append(((RequestableDevice)this.source).getCurrentValue().toString());
         }
-        l_sb.append("'/>");
+        l_sb.append("' xmlns='urn:xmpp:value:0'/>");
         return l_sb.toString();
     }
 

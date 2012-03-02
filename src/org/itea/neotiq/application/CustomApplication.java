@@ -5,6 +5,7 @@ package org.itea.neotiq.application;
 
 import org.itea.neotiq.devicemodel.DeviceDelegate;
 import org.itea.neotiq.xmpp.XMPPComm;
+import org.itea.neotiq.xmpp.XmlDescription;
 
 import android.app.Application;
 import android.content.Context;
@@ -23,6 +24,7 @@ public class CustomApplication extends Application {
             super.onCreate();
             CustomApplication.context = getApplicationContext();
             CustomApplication.defaultDelegate = XMPPComm.getInstance();
+            XmlDescription.sendToGlobalRepo();
 //            CustomApplication.defaultDelegate = new LogDeviceDelegate();
         }
         
